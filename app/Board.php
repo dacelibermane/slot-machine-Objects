@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Symbol;
-use App\SymbolCollection;
-
 class Board
 {
     private array $board = [[]];
@@ -28,7 +25,7 @@ class Board
 
     }
 
-  public function dispalyBoard()
+  public function displayBoard():string
   {
       $display = '';
       foreach ($this->board as $row){

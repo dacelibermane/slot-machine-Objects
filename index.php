@@ -4,26 +4,25 @@ require_once "vendor/autoload.php";
 
 use App\Board;
 use  App\SymbolCollection;
+use App\Player;
 
-$userCoins = 0;
-$creditsPerSpin = 5;
 
 echo "\nWelcome!\nCost per spin is 5 coins. \n";
-$userCoins = (int)readline("Please insert money to begin the game <<<\n");
+$player = new Player((int)readline("Please insert money to begin the game <<<\n"));
 
-while ($userCoins < $creditsPerSpin) {
-    echo "You inserted " . $userCoins . ".\n";
-    $addCoins = (int)readline("\nPlease insert more coins: ");
-    $userCoins += $addCoins;
 
-    if ($userCoins === $creditsPerSpin) {
+while ($player->getCredit() < $player->getCostPerSpin()) {
+    echo "You inserted " . $player->getCredit() . ".\n";
+    $player->addCoins((int)readline("\nPlease insert more coins: "));
+
+    if ($player->getCredit() === $player->getCostPerSpin()) {
         break;
     }
 }
 
 $board = new Board(3, 5);
 $board->addRandomSymbols($symbols = new SymbolCollection());
-echo $board->dispalyBoard();
+echo $board->displayBoard();
 
 
 
